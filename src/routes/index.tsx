@@ -136,7 +136,7 @@ function App() {
         <Typography variant={isMobile ? "h5" : "h3"}>
           150 total spots
         </Typography>
-        <Button variant="contained" color="primary">
+        <Button variant="contained" color="primary" href="/waitlist">
           Join the waitlist
         </Button>
       </BannerSection>
