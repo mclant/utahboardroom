@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router"
-import { Box, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Box, Typography, useMediaQuery, useTheme, Button } from "@mui/material"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import { TextPlugin } from "gsap/dist/TextPlugin"
@@ -132,6 +132,14 @@ function App() {
         title="1077 South 1680 West Orem, Utah"
         style={{ flexDirection: "row-reverse" }}
       />
+      <BannerSection bgColor={theme.palette.secondary.main}>
+        <Typography variant={isMobile ? "h5" : "h3"}>
+          150 total spots
+        </Typography>
+        <Button variant="contained" color="primary">
+          Join the waitlist
+        </Button>
+      </BannerSection>
       <Footer />
     </Box>
   )

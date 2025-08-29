@@ -111,21 +111,23 @@ export const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: ({ theme }) => ({
+        root: ({ theme, ownerState }) => ({
           borderRadius: "12px",
           textTransform: "none",
           fontFamily: theme.typography.h6.fontFamily,
           fontWeight: 600,
           transition: "all 0.3s ease",
-        }),
-        containedPrimary: ({ theme }) => ({
-          backgroundColor: theme.palette.accent1.main,
-          color: theme.palette.primary.main,
-          "&:hover": {
-            opacity: 0.7,
-            transform: "translateY(-2px)",
-            boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
-          },
+          ...(ownerState.variant === "contained" && {
+            ...(ownerState.color === "primary" && {
+              backgroundColor: theme.palette.accent1.main,
+              color: theme.palette.primary.main,
+              "&:hover": {
+                opacity: 0.7,
+                transform: "translateY(-2px)",
+                boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
+              },
+            }),
+          }),
         }),
       },
     },
