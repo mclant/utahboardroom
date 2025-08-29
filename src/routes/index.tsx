@@ -108,7 +108,7 @@ function App() {
         bgColor={theme.palette.primary.main}
         imageSrc={tb2Image}
         title="Tension Board 2 X2"
-        style={{ flexDirection: "row-reverse" }}
+        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
       />
       <BannerSection
         bgColor={theme.palette.secondary.main}
@@ -119,7 +119,7 @@ function App() {
         bgColor={theme.palette.primary.main}
         imageSrc={moonboardImg}
         title="Moon Board X2"
-        style={{ flexDirection: "row-reverse" }}
+        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
       />
       <BannerSection
         bgColor={theme.palette.secondary.main}
@@ -130,7 +130,7 @@ function App() {
         bgColor={theme.palette.primary.main}
         imageSrc={locationImg}
         title="1077 South 1680 West Orem, Utah"
-        style={{ flexDirection: "row-reverse" }}
+        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
       />
       <BannerSection bgColor={theme.palette.secondary.main}>
         <Typography variant={isMobile ? "h5" : "h3"}>

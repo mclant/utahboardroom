@@ -147,7 +147,7 @@ export const theme = createTheme({
   },
   typography: {
     fontFamily:
-      '"Inter", "Bai Jamjuree", "Roboto", "Helvetica", "Arial", sans-serif',
+      '"Bai Jamjuree", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
       textAlign: "center",
       fontFamily: '"Bai Jamjuree", "Inter", sans-serif',

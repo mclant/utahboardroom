@@ -1,15 +1,17 @@
-import { Box, Link } from "@mui/material"
-// import { Link } from "@tanstack/react-router"
+import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material"
 
 export default function Header() {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"))
+
   return (
     <Box
       id="header"
       sx={{
-        position: "fixed",
-        top: 12,
-        left: 12,
-        right: 12,
+        position: isMobile ? "absolute" : "fixed",
+        top: isMobile ? 6 : 8,
+        left: isMobile ? 6 : 8,
+        right: isMobile ? 6 : 8,
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
@@ -21,14 +23,27 @@ export default function Header() {
         zIndex: 1,
       }}
     >
-      <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Link href="/">Home</Link>
-        <Link href="/demo/tanstack-query">About Us</Link>
-        <Link href="/demo/tanstack-query">Contact Us</Link>
-      </Box>
-      <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Link href="/waitlist">Join the waitlist</Link>
-      </Box>
+      {isMobile ? (
+        <>
+          <Typography variant="body1" color={theme.palette.accent2.main}>
+            UBR
+          </Typography>
+          <Box sx={{ display: "flex", gap: "1rem" }}>
+            <Link href="/waitlist">Join the waitlist</Link>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box sx={{ display: "flex", gap: "1rem" }}>
+            <Link href="/">Home</Link>
+            <Link href="/">About Us</Link>
+            <Link href="/">Contact Us</Link>
+          </Box>
+          <Box sx={{ display: "flex", gap: "1rem" }}>
+            <Link href="/waitlist">Join the waitlist</Link>
+          </Box>
+        </>
+      )}
     </Box>
   )
 }
