@@ -188,7 +188,7 @@ function RouteComponent() {
             </Stack>
           </Box>
         )}
-        <RouterLink to="/waitlist">
+        <RouterLink to="/">
           <Link>Learn More</Link>
         </RouterLink>
       </Box>
