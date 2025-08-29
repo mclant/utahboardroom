@@ -1,9 +1,9 @@
-import { Box, Link, useMediaQuery, useTheme } from "@mui/material"
+import { Box, Link, useTheme } from "@mui/material"
 // import { Link } from "@tanstack/react-router"
 
 export default function Header() {
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
+  // const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
   return (
     <Box

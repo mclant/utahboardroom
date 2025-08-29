@@ -1,5 +1,4 @@
 import { Outlet, createRootRouteWithContext } from "@tanstack/react-router"
-import { Box } from "@mui/material"
 
 import type { QueryClient } from "@tanstack/react-query"
 
