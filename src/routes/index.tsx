@@ -11,6 +11,7 @@ import moonboardImg from "/moonboard.jpg"
 import kilterImg from "/kilterboardsingle.jpg"
 import trainingImg from "/training.jpg"
 import locationImg from "/gymlocation.png"
+import { Link as RouterLink } from "@tanstack/react-router"
 
 gsap.registerPlugin(useGSAP, TextPlugin)
 
@@ -136,9 +137,11 @@ function App() {
         <Typography variant={isMobile ? "h5" : "h3"}>
           150 total spots
         </Typography>
-        <Button variant="contained" color="primary" href="/waitlist">
-          Join the waitlist
-        </Button>
+        <RouterLink to="/waitlist">
+          <Button variant="contained" color="primary">
+            Join the waitlist
+          </Button>
+        </RouterLink>
       </BannerSection>
       <Footer />
     </Box>

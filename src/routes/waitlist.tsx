@@ -10,7 +10,7 @@ import {
   useMediaQuery,
 } from "@mui/material"
 import { useQueryClient } from "@tanstack/react-query"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, Link as RouterLink } from "@tanstack/react-router"
 import { useState } from "react"
 
 export const Route = createFileRoute("/waitlist")({
@@ -188,7 +188,9 @@ function RouteComponent() {
             </Stack>
           </Box>
         )}
-        <Link href="/">Learn More</Link>
+        <RouterLink to="/waitlist">
+          <Link>Learn More</Link>
+        </RouterLink>
       </Box>
     </Box>
   )

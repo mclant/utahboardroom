@@ -1,5 +1,5 @@
 import { Box, Link, useTheme } from "@mui/material"
-// import { Link } from "@tanstack/react-router"
+import { Link as RouterLink } from "@tanstack/react-router"
 
 export default function Header() {
   const theme = useTheme()
@@ -19,12 +19,20 @@ export default function Header() {
       }}
     >
       <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
-        <Link href="/">Home</Link>
-        <Link href="/demo/tanstack-query">About Us</Link>
-        <Link href="/demo/tanstack-query">Contact Us</Link>
+        <RouterLink to="/waitlist">
+          <Link>Home</Link>
+        </RouterLink>
+        <RouterLink to="/waitlist">
+          <Link>About Us</Link>
+        </RouterLink>
+        <RouterLink to="/waitlist">
+          <Link>Contact Us</Link>
+        </RouterLink>
       </Box>
       <Box sx={{ display: "flex", gap: "1rem" }}>
-        <Link href="/waitlist">Join the waitlist</Link>
+        <RouterLink to="/waitlist">
+          <Link>Join the waitlist</Link>
+        </RouterLink>
       </Box>
     </Box>
   )

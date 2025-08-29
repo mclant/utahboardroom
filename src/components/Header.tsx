@@ -1,4 +1,5 @@
 import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Link as RouterLink } from "@tanstack/react-router"
 
 export default function Header() {
   const theme = useTheme()
@@ -29,18 +30,28 @@ export default function Header() {
             UBR
           </Typography>
           <Box sx={{ display: "flex", gap: "1rem" }}>
-            <Link href="/waitlist">Join the waitlist</Link>
+            <RouterLink to="/waitlist">
+              <Link>Join the waitlist</Link>
+            </RouterLink>
           </Box>
         </>
       ) : (
         <>
           <Box sx={{ display: "flex", gap: "1rem" }}>
-            <Link href="/">Home</Link>
-            <Link href="/">About Us</Link>
-            <Link href="/">Contact Us</Link>
+            <RouterLink to="/waitlist">
+              <Link href="/">Home</Link>
+            </RouterLink>
+            <RouterLink to="/waitlist">
+              <Link href="/">About Us</Link>
+            </RouterLink>
+            <RouterLink to="/waitlist">
+              <Link href="/">Contact Us</Link>
+            </RouterLink>
           </Box>
           <Box sx={{ display: "flex", gap: "1rem" }}>
-            <Link href="/waitlist">Join the waitlist</Link>
+            <RouterLink to="/waitlist">
+              <Link href="/waitlist">Join the waitlist</Link>
+            </RouterLink>
           </Box>
         </>
       )}
