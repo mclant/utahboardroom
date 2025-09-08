@@ -145,6 +145,7 @@ export const theme = createTheme({
       },
     },
   },
+  // adding a comment
   typography: {
     fontFamily:
       '"Bai Jamjuree", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',
