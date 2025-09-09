@@ -1,4 +1,4 @@
-import { Box, Link, Typography, useMediaQuery, useTheme } from "@mui/material"
+import { Box, Link, useMediaQuery, useTheme } from "@mui/material"
 import { Link as RouterLink } from "@tanstack/react-router"
 
 export default function Header() {
