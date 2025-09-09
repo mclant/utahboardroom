@@ -240,11 +240,11 @@ export default function IntroInfo() {
         <Typography variant="body1">
           If you have questions, or want to get in contact, send us an email at
           <Link
-            href="mailto:matthewclant@gmail.com"
+            href="mailto:matt@utahboardroom.com"
             color="accent1.main"
             sx={{ ml: "4px" }}
           >
-            matthewclant@gmail.com
+            matt@utahboardroom.com
           </Link>
         </Typography>
       </Box>
