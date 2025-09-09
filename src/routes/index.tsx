@@ -12,6 +12,7 @@ import kilterImg from "/kilterboardsingle.jpg"
 import trainingImg from "/training.jpg"
 import locationImg from "/gymlocation.png"
 import { Link as RouterLink } from "@tanstack/react-router"
+import IntroInfo from "../components/homepage/IntroInfo"
 
 gsap.registerPlugin(useGSAP, TextPlugin)
 
@@ -23,55 +24,55 @@ function App() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
 
-  useGSAP(() => {
-    gsap.to(".introText", {
-      text: "Kilter Board",
-      duration: 0.001,
-      delay: 0.15,
-    })
-    gsap.to(".introText", {
-      text: "Pusher",
-      duration: 0.001,
-      delay: 0.3,
-    })
-    gsap.to(".introText", {
-      text: "Moon Board",
-      duration: 0.001,
-      delay: 0.45,
-    })
-    gsap.to(".introText", {
-      text: "Tension Climbing",
-      duration: 0.001,
-      delay: 0.6,
-    })
-    gsap.to(".introText", {
-      text: "Kilter Grips",
-      duration: 0.001,
-      delay: 0.75,
-    })
-    gsap.to(".introText", {
-      text: "Beastmaker",
-      duration: 0.001,
-      delay: 0.9,
-    })
-    gsap.to(".introText", {
-      text: "Utah Board Room",
-      duration: 0.001,
-      delay: 1.05,
-    })
-    gsap.from("#header", {
-      y: -50,
-      opacity: 0,
-      delay: 2,
-      duration: 1.5,
-    })
-    gsap.from(".supportText", {
-      y: 50,
-      opacity: 0,
-      delay: 2,
-      duration: 1.5,
-    })
-  }, {})
+  // useGSAP(() => {
+  //   gsap.to(".introText", {
+  //     text: "Kilter Board",
+  //     duration: 0.001,
+  //     delay: 0.15,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Pusher",
+  //     duration: 0.001,
+  //     delay: 0.3,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Moon Board",
+  //     duration: 0.001,
+  //     delay: 0.45,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Tension Climbing",
+  //     duration: 0.001,
+  //     delay: 0.6,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Kilter Grips",
+  //     duration: 0.001,
+  //     delay: 0.75,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Beastmaker",
+  //     duration: 0.001,
+  //     delay: 0.9,
+  //   })
+  //   gsap.to(".introText", {
+  //     text: "Utah Board Room",
+  //     duration: 0.001,
+  //     delay: 1.05,
+  //   })
+  //   gsap.from("#header", {
+  //     y: -50,
+  //     opacity: 0,
+  //     delay: 2,
+  //     duration: 1.5,
+  //   })
+  //   gsap.from(".supportText", {
+  //     y: 50,
+  //     opacity: 0,
+  //     delay: 2,
+  //     duration: 1.5,
+  //   })
+  // }, {})
 
   return (
     <Box
@@ -90,7 +91,7 @@ function App() {
         style={{ flexDirection: "column", gap: 2 }}
       >
         <Typography className="introText" variant={isMobile ? "h3" : "h1"}>
-          Tension Board 2
+          Utah Board Room
         </Typography>
         <Typography
           className="supportText"
@@ -99,8 +100,22 @@ function App() {
         >
           Coming to Orem, Utah
         </Typography>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <Button variant="outlined" color="primary">
+            Learn more
+          </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            component={RouterLink}
+            to="/waitlist"
+          >
+            Join the waitlist
+          </Button>
+        </Box>
       </BannerSection>
-      <BannerSection
+      <IntroInfo />
+      {/* <BannerSection
         bgColor={theme.palette.secondary.main}
         imageSrc={alexKilterImg}
         title="6 boards"
@@ -132,7 +147,7 @@ function App() {
         imageSrc={locationImg}
         title="1077 South 1680 West Orem, Utah"
         style={!isMobile ? { flexDirection: "row-reverse" } : {}}
-      />
+      /> */}
       <BannerSection bgColor={theme.palette.secondary.main}>
         <Typography variant={isMobile ? "h5" : "h3"}>
           150 total spots

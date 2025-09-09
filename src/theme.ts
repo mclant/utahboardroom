@@ -123,7 +123,17 @@ export const theme = createTheme({
               color: theme.palette.primary.main,
               "&:hover": {
                 opacity: 0.7,
-                transform: "translateY(-2px)",
+                boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
+              },
+            }),
+          }),
+          ...(ownerState.variant === "outlined" && {
+            ...(ownerState.color === "primary" && {
+              backgroundColor: "transparent",
+              color: theme.palette.accent1.main,
+              border: `1px solid ${theme.palette.accent1.main}`,
+              "&:hover": {
+                opacity: 0.7,
                 boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
               },
             }),
@@ -134,18 +144,36 @@ export const theme = createTheme({
     MuiLink: {
       styleOverrides: {
         root: ({ theme }) => ({
-          color: theme.palette.accent2.main,
+          color: theme.palette.text.primary,
           fontFamily: '"Bai Jamjuree", "Inter", sans-serif',
           fontWeight: 600,
           textDecoration: "none",
+          cursor: "pointer",
           "&:hover": {
             opacity: 0.7,
           },
         }),
       },
     },
+    MuiCard: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.secondary.main,
+          borderRadius: "12px",
+          padding: "16px",
+          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+          transition: "all 0.3s ease",
+        }),
+      },
+    },
+    MuiAccordion: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.secondary.main,
+        }),
+      },
+    },
   },
-  // adding a comment
   typography: {
     fontFamily:
       '"Bai Jamjuree", "Inter", "Roboto", "Helvetica", "Arial", sans-serif',

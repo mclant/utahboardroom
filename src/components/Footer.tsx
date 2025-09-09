@@ -19,15 +19,10 @@ export default function Header() {
       }}
     >
       <Box sx={{ display: "flex", gap: "1rem", flexDirection: "column" }}>
-        <RouterLink to="/waitlist">
+        <RouterLink to="/">
           <Link>Home</Link>
         </RouterLink>
-        <RouterLink to="/waitlist">
-          <Link>About Us</Link>
-        </RouterLink>
-        <RouterLink to="/waitlist">
-          <Link>Contact Us</Link>
-        </RouterLink>
+        <Link href="/#contactus">Contact Us</Link>
       </Box>
       <Box sx={{ display: "flex", gap: "1rem" }}>
         <RouterLink to="/waitlist">

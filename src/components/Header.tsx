@@ -24,37 +24,17 @@ export default function Header() {
         zIndex: 1,
       }}
     >
-      {isMobile ? (
-        <>
-          <Typography variant="body1" color={theme.palette.accent2.main}>
-            UBR
-          </Typography>
-          <Box sx={{ display: "flex", gap: "1rem" }}>
-            <RouterLink to="/waitlist">
-              <Link>Join the waitlist</Link>
-            </RouterLink>
-          </Box>
-        </>
-      ) : (
-        <>
-          <Box sx={{ display: "flex", gap: "1rem" }}>
-            <RouterLink to="/waitlist">
-              <Link href="/">Home</Link>
-            </RouterLink>
-            <RouterLink to="/waitlist">
-              <Link href="/">About Us</Link>
-            </RouterLink>
-            <RouterLink to="/waitlist">
-              <Link href="/">Contact Us</Link>
-            </RouterLink>
-          </Box>
-          <Box sx={{ display: "flex", gap: "1rem" }}>
-            <RouterLink to="/waitlist">
-              <Link href="/waitlist">Join the waitlist</Link>
-            </RouterLink>
-          </Box>
-        </>
-      )}
+      <Box sx={{ display: "flex", gap: "1rem" }}>
+        <RouterLink to="/">
+          <Link href="/">Home</Link>
+        </RouterLink>
+        {!isMobile && <Link href="/#contactus">Contact Us</Link>}
+      </Box>
+      <Box sx={{ display: "flex", gap: "1rem" }}>
+        <RouterLink to="/waitlist">
+          <Link href="/waitlist">Join the waitlist</Link>
+        </RouterLink>
+      </Box>
     </Box>
   )
 }
