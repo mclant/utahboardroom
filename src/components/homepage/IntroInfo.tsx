@@ -199,8 +199,8 @@ export default function IntroInfo() {
             <AccordionDetails>
               <Typography variant="body1" sx={{ textAlign: "left" }}>
                 To reduce the crowds, we will have a limited number of
-                memberships available - 150. If the board room can fit more
-                space, we will increase the amount of memberships.
+                memberships available - 150. If the board room can handle more
+                than that, we will increase the amount of memberships.
               </Typography>
             </AccordionDetails>
           </Accordion>
