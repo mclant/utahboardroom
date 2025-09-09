@@ -173,6 +173,13 @@ export const theme = createTheme({
         }),
       },
     },
+    MuiCircularProgress: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.accent1.main,
+        }),
+      },
+    },
   },
   typography: {
     fontFamily:

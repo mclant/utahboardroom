@@ -8,6 +8,7 @@ import {
   TextField,
   Link,
   useMediaQuery,
+  CircularProgress,
 } from "@mui/material"
 import { useQueryClient } from "@tanstack/react-query"
 import { createFileRoute, Link as RouterLink } from "@tanstack/react-router"
@@ -28,7 +29,8 @@ function RouteComponent() {
 
   const queryClient = useQueryClient()
   const { mutateAsync: joinWaitlist } = useJoinWaitlist()
-  const { data: numWaitlistUsers } = useGetNumWaitlistUsers()
+  const { data: numWaitlistUsers, isLoading: isLoadingNumWaitlistUsers } =
+    useGetNumWaitlistUsers()
   // @ts-ignore
   const remainingSpots = 150 - (numWaitlistUsers?.data?.length || 0)
 
@@ -125,9 +127,13 @@ function RouteComponent() {
           <Typography variant="h4">
             {isMobile ? "Utah Board Room waitlist" : "Join the waitlist"}
           </Typography>
-          <Typography variant="h6" color={theme.palette.accent1.main}>
-            *Only {remainingSpots} spots left
-          </Typography>
+          {isLoadingNumWaitlistUsers ? (
+            <CircularProgress size={32} />
+          ) : (
+            <Typography variant="h6" color={theme.palette.accent1.main}>
+              *Only {remainingSpots} spots left
+            </Typography>
+          )}
         </Box>
         {success ? (
           <Typography
