@@ -129,11 +129,11 @@ function RouteComponent() {
           </Typography>
           {isLoadingNumWaitlistUsers ? (
             <CircularProgress size={32} />
-          ) : (
+          ) : remainingSpots > 0 ? (
             <Typography variant="h6" color={theme.palette.accent1.main}>
-              *Only {remainingSpots} spots left
+              *Only {remainingSpots} spot{remainingSpots === 1 ? "" : "s"} left
             </Typography>
-          )}
+          ) : null}
         </Box>
         {success ? (
           <Typography
