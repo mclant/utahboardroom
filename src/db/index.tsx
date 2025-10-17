@@ -66,19 +66,17 @@ export function useJoinWaitlist() {
         .from("WaitlistUsers")
         .insert([{ full_name: fullName, email }])
         .select(),
+  })
+}
 
-    // {
-    //   onSettled: (data, error) => {
-    //     if (data?.error?.message || error?.message) {
-    //       toast.error(
-    //         "Hmm, there was an issue sending your reset password link"
-    //       )
-    //       throw new Error(error?.message)
-    //     } else {
-    //       toast.success("Email successfully sent!")
-    //     }
-    //   },
-    // }
+export function useSubmitFeedback() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ userId, feedback }) =>
+      supabase
+        .from("UserFeedback")
+        .insert([{ user_id: userId, feedback }])
+        .select(),
   })
 }
 

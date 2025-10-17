@@ -1,4 +1,8 @@
-import { useJoinWaitlist, useGetNumWaitlistUsers } from "@/db"
+import {
+  useJoinWaitlist,
+  useGetNumWaitlistUsers,
+  useSubmitFeedback,
+} from "@/db"
 import {
   Box,
   Typography,
@@ -26,18 +30,25 @@ function RouteComponent() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [isFeedbackSuccess, setIsFeedbackSuccess] = useState(false)
+  const [feedback, setFeedback] = useState<string | null>(null)
+  const [feedbackError, setFeedbackError] = useState<string | null>(null)
+  const [feedbackLoading, setFeedbackLoading] = useState(false)
+  const [userId, setUserId] = useState<string | null>(null)
 
   const queryClient = useQueryClient()
   const { mutateAsync: joinWaitlist } = useJoinWaitlist()
+  const { mutateAsync: submitFeedback } = useSubmitFeedback()
   const { data: numWaitlistUsers, isLoading: isLoadingNumWaitlistUsers } =
     useGetNumWaitlistUsers()
   // @ts-ignore
-  const remainingSpots = 150 - (numWaitlistUsers?.data?.length || 0)
+  const remainingSpots = 200 - (numWaitlistUsers?.data?.length || 0)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
-    console.log("Form submitted:", { name, email })
+    setUserId(null)
+    setError(null)
     // Add your form submission logic here
     try {
       // @ts-ignore
@@ -45,6 +56,7 @@ function RouteComponent() {
       if (error) {
         throw new Error(error.details)
       }
+      setUserId(data?.[0]?.id)
       await queryClient.invalidateQueries({
         queryKey: ["getNumWaitlistUsers"],
       })
@@ -56,6 +68,27 @@ function RouteComponent() {
       )
     } finally {
       setIsLoading(false)
+    }
+  }
+
+  const handleSubmitFeedback = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFeedbackLoading(true)
+    setFeedbackError(null)
+    try {
+      // @ts-ignore
+      const { data, error } = await submitFeedback({ userId, feedback })
+      if (error) {
+        throw new Error(error.details)
+      }
+      setIsFeedbackSuccess(true)
+    } catch (error) {
+      console.error(error)
+      setFeedbackError(
+        `There was an error submitting feedback: ${error || "Unknown error"}`
+      )
+    } finally {
+      setFeedbackLoading(false)
     }
   }
 
@@ -136,14 +169,56 @@ function RouteComponent() {
           ) : null}
         </Box>
         {success ? (
-          <Typography
-            variant="h5"
-            color={theme.palette.accent3.main}
-            sx={{ textAlign: "center" }}
+          <Box
+            sx={{
+              width: "100%",
+              maxWidth: 400,
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+            }}
           >
-            You have been successfully added to the waitlist! We will notify you
-            when we are open.
-          </Typography>
+            <Typography
+              variant="h5"
+              color={theme.palette.accent3.main}
+              sx={{ textAlign: "center" }}
+            >
+              You have been successfully added to the waitlist! We will notify
+              you with updates as we get closer to opening.
+            </Typography>
+            {isFeedbackSuccess ? (
+              <Typography variant="body1" fontWeight={600}>
+                Thank you for your feedback!
+              </Typography>
+            ) : (
+              <>
+                <Typography variant="body1" fontWeight={600}>
+                  Questions, comments, or feedback?
+                </Typography>
+                <TextField
+                  placeholder="Leave your feedback here"
+                  value={feedback}
+                  onChange={(e) => setFeedback(e.target.value)}
+                  fullWidth
+                  multiline
+                  rows={4}
+                />
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmitFeedback}
+                  disabled={feedbackLoading}
+                >
+                  {feedbackLoading ? "Submitting..." : "Submit feedback"}
+                </Button>
+                {feedbackError && (
+                  <Typography variant="body2" color={theme.palette.error.main}>
+                    {feedbackError}
+                  </Typography>
+                )}
+              </>
+            )}
+          </Box>
         ) : (
           <Box
             component="form"
