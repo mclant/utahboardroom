@@ -172,7 +172,8 @@ export default function IntroInfo() {
             </AccordionSummary>
             <AccordionDetails>
               <Typography variant="body1" sx={{ textAlign: "left" }}>
-                Approximately $60 per month, and $50 per month for students.
+                $80 per month. This includes 24/7 access, and a guaranteed
+                crowd-free experience.
               </Typography>
             </AccordionDetails>
           </Accordion>
