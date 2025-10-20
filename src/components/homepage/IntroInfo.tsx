@@ -15,12 +15,119 @@ import MoonLayout from "/moonlayout.png"
 import Tb2Layout from "/tb2layout.png"
 import { Link as RouterLink } from "@tanstack/react-router"
 import { IoCaretDown } from "react-icons/io5"
+import ReviewCard from "../atoms/ReviewCard"
+
+const reviews = [
+  {
+    text: "So beyond stoked for this",
+    name: "Yoshi",
+    date: "Oct 18",
+  },
+  {
+    text: "Excited to pull all my tendons again, while paying you to do so ❤️",
+    name: "Tate",
+    date: "Oct 18",
+  },
+  {
+    text: "Stōked!",
+    name: "Kyle",
+    date: "Oct 18",
+  },
+  {
+    text: "i’m so excited!!! this is a great idea",
+    name: "Elyse",
+    date: "Oct 18",
+  },
+  {
+    text: "YAYYYYYYYYYYY",
+    name: "Kaleb",
+    date: "Oct 19",
+  },
+  {
+    text: "This is going to be so much fun! ",
+    name: "Braden",
+    date: "Oct 19",
+  },
+  {
+    text: "Love to see the idea come to life!",
+    name: "Jackson",
+    date: "Oct 19",
+  },
+  {
+    text: "super hyped to have a 24hr board gym that's dope",
+    name: "Alexander",
+    date: "Oct 19",
+  },
+  {
+    text: "Stoked",
+    name: "Jacob",
+    date: "Oct 19",
+  },
+  {
+    text: "Stoked for this! ",
+    name: "Drew",
+    date: "Oct 19",
+  },
+  {
+    text: "I think this is arguably the smartest training area idea ever.",
+    name: "Ian",
+    date: "Oct 19",
+  },
+]
 
 export default function IntroInfo() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   return (
     <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: theme.palette.primary.main,
+          minHeight: "50vh",
+          width: "100%",
+          paddingY: 20,
+          gap: 4,
+        }}
+      >
+        <Box
+          sx={{
+            width: "100%",
+            overflow: "hidden",
+            position: "relative",
+            py: 2,
+          }}
+        >
+          {/* The scrolling track */}
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 2,
+              width: "fit-content",
+              animation: "scrollReviews 60s linear infinite",
+              "@keyframes scrollReviews": {
+                "0%": { transform: "translateX(0)" },
+                "100%": { transform: "translateX(-50%)" },
+              },
+            }}
+          >
+            {/* Double up reviews so animation can loop seamlessly */}
+            {[...reviews, ...reviews].map((review, i) => (
+              <Box key={review.name + i} sx={{ minWidth: 320 }}>
+                <ReviewCard
+                  text={review.text}
+                  name={review.name}
+                  date={review.date}
+                />
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -42,11 +149,6 @@ export default function IntroInfo() {
           Utah's first boards only climbing gym. We have 3 boards, with 3 more
           on the way.
         </Typography>
-        {/* <Typography variant="body1">
-        Our current boards include 1 12x12 Tension Board 2, 1 10x12 Kilter Board
-        Full Ride, and 1 8x12 2024 Moon Board. As we grow, we are excited to add
-        3 more boards to the mix.
-      </Typography> */}
         <Box
           sx={{
             display: "flex",

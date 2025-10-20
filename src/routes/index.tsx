@@ -59,39 +59,6 @@ function App() {
         </Box>
       </BannerSection>
       <IntroInfo />
-      {/* <BannerSection
-        bgColor={theme.palette.secondary.main}
-        imageSrc={alexKilterImg}
-        title="6 boards"
-      />
-      <BannerSection
-        bgColor={theme.palette.primary.main}
-        imageSrc={tb2Image}
-        title="Tension Board 2 X2"
-        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
-      />
-      <BannerSection
-        bgColor={theme.palette.secondary.main}
-        imageSrc={kilterImg}
-        title="Kilter Board X2"
-      />
-      <BannerSection
-        bgColor={theme.palette.primary.main}
-        imageSrc={moonboardImg}
-        title="Moon Board X2"
-        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
-      />
-      <BannerSection
-        bgColor={theme.palette.secondary.main}
-        imageSrc={trainingImg}
-        title="Training/lifting equipment"
-      />
-      <BannerSection
-        bgColor={theme.palette.primary.main}
-        imageSrc={locationImg}
-        title="1077 South 1680 West Orem, Utah"
-        style={!isMobile ? { flexDirection: "row-reverse" } : {}}
-      /> */}
       <BannerSection bgColor={theme.palette.secondary.main}>
         <Typography variant={isMobile ? "h5" : "h3"}>
           200 total spots
