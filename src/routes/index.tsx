@@ -94,7 +94,7 @@ function App() {
       /> */}
       <BannerSection bgColor={theme.palette.secondary.main}>
         <Typography variant={isMobile ? "h5" : "h3"}>
-          150 total spots
+          200 total spots
         </Typography>
         <RouterLink to="/waitlist">
           <Button variant="contained" color="primary">
