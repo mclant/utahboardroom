@@ -1,8 +1,4 @@
-import {
-  useJoinWaitlist,
-  useGetNumWaitlistUsers,
-  useSubmitFeedback,
-} from "@/db"
+import { useJoinWaitlist, useGetWaitlistUsers, useSubmitFeedback } from "@/db"
 import {
   Box,
   Typography,
@@ -39,10 +35,10 @@ function RouteComponent() {
   const queryClient = useQueryClient()
   const { mutateAsync: joinWaitlist } = useJoinWaitlist()
   const { mutateAsync: submitFeedback } = useSubmitFeedback()
-  const { data: numWaitlistUsers, isLoading: isLoadingNumWaitlistUsers } =
-    useGetNumWaitlistUsers()
+  const { data: waitlistUsers, isLoading: isLoadingWaitlistUsers } =
+    useGetWaitlistUsers()
   // @ts-ignore
-  const remainingSpots = 200 - (numWaitlistUsers?.data?.length || 0)
+  const remainingSpots = 200 - (waitlistUsers?.data?.length || 0)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -58,7 +54,7 @@ function RouteComponent() {
       }
       setUserId(data?.[0]?.id)
       await queryClient.invalidateQueries({
-        queryKey: ["getNumWaitlistUsers"],
+        queryKey: ["getWaitlistUsers"],
       })
       setSuccess("You're on the waitlist!")
     } catch (error) {
@@ -160,7 +156,7 @@ function RouteComponent() {
           <Typography variant="h4">
             {isMobile ? "Utah Board Room waitlist" : "Join the waitlist"}
           </Typography>
-          {isLoadingNumWaitlistUsers ? (
+          {isLoadingWaitlistUsers ? (
             <CircularProgress size={32} />
           ) : remainingSpots > 0 ? (
             <Typography variant="h6" color={theme.palette.accent1.main}>

@@ -10,12 +10,22 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
+import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
+import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
+import { Route as DashboardAdminWaitlistRouteImport } from './routes/dashboard/admin/waitlist'
+import { Route as DashboardAdminGymSettingsRouteImport } from './routes/dashboard/admin/gym-settings'
 
 const WaitlistRoute = WaitlistRouteImport.update({
   id: '/waitlist',
   path: '/waitlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,33 +38,95 @@ const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardAdminRoute = DashboardAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAccountRoute = DashboardAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardAdminWaitlistRoute = DashboardAdminWaitlistRouteImport.update({
+  id: '/waitlist',
+  path: '/waitlist',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
+const DashboardAdminGymSettingsRoute =
+  DashboardAdminGymSettingsRouteImport.update({
+    id: '/gym-settings',
+    path: '/gym-settings',
+    getParentRoute: () => DashboardAdminRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/waitlist': typeof WaitlistRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/waitlist': typeof WaitlistRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRouteWithChildren
   '/waitlist': typeof WaitlistRoute
+  '/dashboard/account': typeof DashboardAccountRoute
+  '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/waitlist' | '/demo/tanstack-query'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/waitlist'
+    | '/dashboard/account'
+    | '/dashboard/admin'
+    | '/demo/tanstack-query'
+    | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/waitlist'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/waitlist' | '/demo/tanstack-query'
-  id: '__root__' | '/' | '/waitlist' | '/demo/tanstack-query'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/waitlist'
+    | '/dashboard/account'
+    | '/dashboard/admin'
+    | '/demo/tanstack-query'
+    | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/waitlist'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/waitlist'
+    | '/dashboard/account'
+    | '/dashboard/admin'
+    | '/demo/tanstack-query'
+    | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/waitlist'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRouteWithChildren
   WaitlistRoute: typeof WaitlistRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
@@ -66,6 +138,13 @@ declare module '@tanstack/react-router' {
       path: '/waitlist'
       fullPath: '/waitlist'
       preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -82,11 +161,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/admin': {
+      id: '/dashboard/admin'
+      path: '/admin'
+      fullPath: '/dashboard/admin'
+      preLoaderRoute: typeof DashboardAdminRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/account': {
+      id: '/dashboard/account'
+      path: '/account'
+      fullPath: '/dashboard/account'
+      preLoaderRoute: typeof DashboardAccountRouteImport
+      parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/admin/waitlist': {
+      id: '/dashboard/admin/waitlist'
+      path: '/waitlist'
+      fullPath: '/dashboard/admin/waitlist'
+      preLoaderRoute: typeof DashboardAdminWaitlistRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
+    '/dashboard/admin/gym-settings': {
+      id: '/dashboard/admin/gym-settings'
+      path: '/gym-settings'
+      fullPath: '/dashboard/admin/gym-settings'
+      preLoaderRoute: typeof DashboardAdminGymSettingsRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
   }
 }
 
+interface DashboardAdminRouteChildren {
+  DashboardAdminGymSettingsRoute: typeof DashboardAdminGymSettingsRoute
+  DashboardAdminWaitlistRoute: typeof DashboardAdminWaitlistRoute
+}
+
+const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
+  DashboardAdminGymSettingsRoute: DashboardAdminGymSettingsRoute,
+  DashboardAdminWaitlistRoute: DashboardAdminWaitlistRoute,
+}
+
+const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
+  DashboardAdminRouteChildren,
+)
+
+interface DashboardRouteChildren {
+  DashboardAccountRoute: typeof DashboardAccountRoute
+  DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
+}
+
+const DashboardRouteChildren: DashboardRouteChildren = {
+  DashboardAccountRoute: DashboardAccountRoute,
+  DashboardAdminRoute: DashboardAdminRouteWithChildren,
+}
+
+const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
+  DashboardRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRouteWithChildren,
   WaitlistRoute: WaitlistRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }
