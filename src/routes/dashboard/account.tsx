@@ -8,9 +8,9 @@ export const Route = createFileRoute("/dashboard/account")({
 })
 
 function RouteComponent() {
-  const { data: authUserData, isLoading: isLoadingAuthUser } = useGetAuthUser()
+  const { data: authUserData } = useGetAuthUser()
   const authUser = authUserData?.data?.user
-  const { data: climberData, isLoading: isLoadingClimber } = useGetClimber({
+  const { data: climberData } = useGetClimber({
     userId: authUser?.id || "",
   })
   // @ts-ignore
