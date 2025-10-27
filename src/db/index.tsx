@@ -18,14 +18,14 @@ const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 const supabase = createClient(supabaseUrl || "", supabaseKey || "")
 
-// const cacheTime = 1000 * 60 * 60 * 24 * 7 // 7 days
+const cacheTime = 1000 * 60 * 60 * 24 * 7 // 7 days
 
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 600000, // 10 minutes
-      // cacheTime: cacheTime,
+      gcTime: cacheTime,
       retry: 1,
     },
   },
@@ -80,10 +80,86 @@ export function useSubmitFeedback() {
   })
 }
 
-export function useGetNumWaitlistUsers() {
-  const queryKey = ["getNumWaitlistUsers"]
-  const queryFn = () => supabase.from("WaitlistUsers").select("*")
+export function useGetWaitlistUsers() {
+  const queryKey = ["getWaitlistUsers"]
+  const queryFn = () =>
+    supabase.from("WaitlistUsers").select("*, UserFeedback(*)")
   return useQuery({ queryKey, queryFn })
+}
+
+// export function useGetWaitlistFeedback() {
+//   const queryKey = ["getWaitlistFeedback"]
+//   const queryFn = () =>
+//     supabase.from("UserFeedback").select("*, WaitlistUsers(*)")
+//   return useQuery({ queryKey, queryFn })
+// }
+
+export function useGetAuthUser() {
+  const queryKey = ["getAuthUser"]
+  const queryFn = () => supabase.auth.getUser()
+  return useQuery({ queryKey, queryFn })
+}
+
+export function useGetClimber({ userId }: { userId: string }) {
+  const queryKey = ["getClimber", userId]
+  const queryFn = () => supabase.from("Climber").select("*").eq("id", userId)
+  return useQuery({ queryKey, queryFn, enabled: !!userId })
+}
+
+export function useSignUp() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ email, password }) =>
+      supabase.auth.signUp({ email, password }),
+  })
+}
+
+export function useCreateClimber() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ userId, firstName, lastName, email }) =>
+      supabase
+        .from("Climber")
+        .insert([
+          { id: userId, first_name: firstName, last_name: lastName, email },
+        ])
+        .select(),
+  })
+}
+
+export function useSignIn() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ email, password }) =>
+      supabase.auth.signInWithPassword({ email, password }),
+  })
+}
+
+export function useSignOut() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: () => supabase.auth.signOut(),
+  })
+}
+
+export function useSendResetPasswordEmail() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ email }) =>
+      supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: import.meta.env.VITE_REDIRECT_URL,
+      }),
+  })
+}
+
+export function useResetPassword() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ newPassword }) =>
+      supabase.auth.updateUser({
+        password: newPassword,
+      }),
+  })
 }
 
 export { supabase }
