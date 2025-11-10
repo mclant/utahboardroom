@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
+import { Route as SurveysRouteImport } from './routes/surveys'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SurveysBoardSelectionRouteImport } from './routes/surveys/board-selection'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
@@ -23,6 +25,11 @@ const WaitlistRoute = WaitlistRouteImport.update({
   path: '/waitlist',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SurveysRoute = SurveysRouteImport.update({
+  id: '/surveys',
+  path: '/surveys',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -32,6 +39,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SurveysBoardSelectionRoute = SurveysBoardSelectionRouteImport.update({
+  id: '/board-selection',
+  path: '/board-selection',
+  getParentRoute: () => SurveysRoute,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
@@ -63,20 +75,24 @@ const DashboardAdminGymSettingsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
@@ -84,10 +100,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
@@ -96,30 +114,36 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/demo/tanstack-query'
+    | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/waitlist'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/dashboard'
+    | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/demo/tanstack-query'
+    | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/waitlist'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/demo/tanstack-query'
+    | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/waitlist'
   fileRoutesById: FileRoutesById
@@ -127,6 +151,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  SurveysRoute: typeof SurveysRouteWithChildren
   WaitlistRoute: typeof WaitlistRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
 }
@@ -138,6 +163,13 @@ declare module '@tanstack/react-router' {
       path: '/waitlist'
       fullPath: '/waitlist'
       preLoaderRoute: typeof WaitlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/surveys': {
+      id: '/surveys'
+      path: '/surveys'
+      fullPath: '/surveys'
+      preLoaderRoute: typeof SurveysRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -153,6 +185,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/surveys/board-selection': {
+      id: '/surveys/board-selection'
+      path: '/board-selection'
+      fullPath: '/surveys/board-selection'
+      preLoaderRoute: typeof SurveysBoardSelectionRouteImport
+      parentRoute: typeof SurveysRoute
     }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
@@ -220,9 +259,21 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface SurveysRouteChildren {
+  SurveysBoardSelectionRoute: typeof SurveysBoardSelectionRoute
+}
+
+const SurveysRouteChildren: SurveysRouteChildren = {
+  SurveysBoardSelectionRoute: SurveysBoardSelectionRoute,
+}
+
+const SurveysRouteWithChildren =
+  SurveysRoute._addFileChildren(SurveysRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  SurveysRoute: SurveysRouteWithChildren,
   WaitlistRoute: WaitlistRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
 }

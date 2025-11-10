@@ -127,6 +127,20 @@ export function useCreateClimber() {
   })
 }
 
+export function useGetBoardVotes() {
+  const queryKey = ["getBoardVotes"]
+  const queryFn = () => supabase.from("BoardVotes").select("*")
+  return useQuery({ queryKey, queryFn })
+}
+
+export function useSubmitBoardVotes() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ email, votesMap }) =>
+      supabase.from("BoardVotes").insert([{ email, votesMap }]).select(),
+  })
+}
+
 export function useSignIn() {
   return useMutation({
     // @ts-ignore

@@ -187,6 +187,21 @@ export const theme = createTheme({
         }),
       },
     },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.primary.main,
+          borderRadius: "12px",
+          height: "12px",
+          width: "100%",
+          border: `1px solid ${theme.palette.accent1.main}`,
+          "& .MuiLinearProgress-bar": {
+            backgroundColor: theme.palette.accent1.main,
+            borderRadius: "12px",
+          },
+        }),
+      },
+    },
   },
   typography: {
     fontFamily:
