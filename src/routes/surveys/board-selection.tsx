@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Box,
   Typography,
@@ -7,7 +7,11 @@ import {
   Button,
   TextField,
 } from "@mui/material"
-import { createFileRoute, Link as RouterLink } from "@tanstack/react-router"
+import {
+  createFileRoute,
+  Link as RouterLink,
+  useSearch,
+} from "@tanstack/react-router"
 import { FaMinus, FaPlus } from "react-icons/fa"
 import {
   useGetWaitlistUsers,
@@ -88,6 +92,9 @@ const ALLOWED_VOTES_NUM = 7
 
 export default function BoardSelection() {
   const theme = useTheme()
+  const params = useSearch({ strict: false })
+  // @ts-ignore
+  const emailInQuery = params?.email
   const { data: waitlistUsers, isLoading: isLoadingWaitlistUsers } =
     useGetWaitlistUsers()
   const { data: boardVotes, isLoading: isLoadingBoardVotes } =
@@ -101,6 +108,12 @@ export default function BoardSelection() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (emailInQuery) {
+      setEmail(emailInQuery)
+    }
+  }, [emailInQuery])
 
   const addVote = (id: number) => {
     if (votesUsed >= ALLOWED_VOTES_NUM) return
