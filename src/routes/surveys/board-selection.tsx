@@ -254,6 +254,7 @@ export default function BoardSelection() {
                 <button
                   style={{ cursor: "pointer" }}
                   onClick={() => removeVote(Number(key))}
+                  disabled={option.votes <= 0}
                 >
                   <FaMinus size={20} />
                 </button>
@@ -263,6 +264,7 @@ export default function BoardSelection() {
                 <button
                   style={{ cursor: "pointer" }}
                   onClick={() => addVote(Number(key))}
+                  disabled={option.votes >= ALLOWED_VOTES_NUM}
                 >
                   <FaPlus size={20} />
                 </button>

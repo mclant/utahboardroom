@@ -13,12 +13,14 @@ import {
 import { useQueryClient } from "@tanstack/react-query"
 import { createFileRoute, Link as RouterLink } from "@tanstack/react-router"
 import { useState } from "react"
+import { HiExternalLink } from "react-icons/hi"
 
 export const Route = createFileRoute("/waitlist")({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+  const queryClient = useQueryClient()
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"))
   const [email, setEmail] = useState("")
@@ -32,7 +34,6 @@ function RouteComponent() {
   const [feedbackLoading, setFeedbackLoading] = useState(false)
   const [userId, setUserId] = useState<string | null>(null)
 
-  const queryClient = useQueryClient()
   const { mutateAsync: joinWaitlist } = useJoinWaitlist()
   const { mutateAsync: submitFeedback } = useSubmitFeedback()
   const { data: waitlistUsers, isLoading: isLoadingWaitlistUsers } =
@@ -47,6 +48,14 @@ function RouteComponent() {
     setError(null)
     // Add your form submission logic here
     try {
+      // @ts-ignore
+      const emailExists = waitlistUsers?.data?.some(
+        (user: any) => user.email === email
+      )
+      if (emailExists) {
+        setError("You're already on the waitlist.")
+        return
+      }
       // @ts-ignore
       const { data, error } = await joinWaitlist({ fullName: name, email })
       if (error) {
@@ -264,6 +273,15 @@ function RouteComponent() {
               )}
             </Stack>
           </Box>
+        )}
+        {success && (
+          <RouterLink
+            to="/surveys/board-selection"
+            style={{ display: "flex", alignItems: "center", gap: 4 }}
+          >
+            <Link>Vote on our board selection</Link>
+            <HiExternalLink size={20} />
+          </RouterLink>
         )}
         <RouterLink to="/">
           <Link>Learn More</Link>

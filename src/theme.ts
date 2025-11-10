@@ -106,6 +106,9 @@ export const theme = createTheme({
               color: theme.palette.accent3.main,
             },
           },
+          "& .MuiInputBase-multiline": {
+            padding: 0,
+          },
         }),
       },
     },
