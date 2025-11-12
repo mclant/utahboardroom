@@ -46,18 +46,18 @@ async function sendWaitlistEmails() {
     let successCount = 0
     let failCount = 0
 
-    const testUsers = [
-      {
-        email: "matthewclant@gmail.com",
-        full_name: "Matthew Clant",
-      },
-      // {
-      //   email: "tanner.m.wilks@gmail.com",
-      //   full_name: "Tanner",
-      // },
-    ]
+    // const testUsers = [
+    //   {
+    //     email: "matthewclant@gmail.com",
+    //     full_name: "Matthew Clant",
+    //   },
+    //   {
+    //     email: "tanner.m.wilks@gmail.com",
+    //     full_name: "Tanner",
+    //   },
+    // ]
 
-    for (const user of testUsers as WaitlistUser[]) {
+    for (const user of users as WaitlistUser[]) {
       try {
         console.log(`Sending to ${user.email}...`)
 
@@ -78,7 +78,7 @@ async function sendWaitlistEmails() {
         console.log(`✅ Sent to ${user.email}`)
 
         // Optional: Add a small delay between emails to avoid rate limits (rate limit on free plan is 2 per second)(and 100 emails per day 😭)
-        await new Promise((resolve) => setTimeout(resolve, 100))
+        await new Promise((resolve) => setTimeout(resolve, 600))
       } catch (error) {
         failCount++
         console.error(`❌ Failed to send to ${user.email}:`, error)
