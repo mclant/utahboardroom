@@ -59,6 +59,7 @@ function RouteComponent() {
                   Admin
                 </Typography>
                 <SidebarItem title="Waitlist" to="/dashboard/admin/waitlist" />
+                <SidebarItem title="Surveys" to="/dashboard/admin/surveys" />
                 <SidebarItem
                   title="Gym Settings"
                   to="/dashboard/admin/gym-settings"

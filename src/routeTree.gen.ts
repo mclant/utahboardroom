@@ -18,6 +18,7 @@ import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-qu
 import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
 import { Route as DashboardAdminWaitlistRouteImport } from './routes/dashboard/admin/waitlist'
+import { Route as DashboardAdminSurveysRouteImport } from './routes/dashboard/admin/surveys'
 import { Route as DashboardAdminGymSettingsRouteImport } from './routes/dashboard/admin/gym-settings'
 
 const WaitlistRoute = WaitlistRouteImport.update({
@@ -65,6 +66,11 @@ const DashboardAdminWaitlistRoute = DashboardAdminWaitlistRouteImport.update({
   path: '/waitlist',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
+const DashboardAdminSurveysRoute = DashboardAdminSurveysRouteImport.update({
+  id: '/surveys',
+  path: '/surveys',
+  getParentRoute: () => DashboardAdminRoute,
+} as any)
 const DashboardAdminGymSettingsRoute =
   DashboardAdminGymSettingsRouteImport.update({
     id: '/gym-settings',
@@ -82,6 +88,7 @@ export interface FileRoutesByFullPath {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRoutesByTo {
@@ -94,6 +101,7 @@ export interface FileRoutesByTo {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRoutesById {
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
+  '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
 }
 export interface FileRouteTypes {
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
   id:
     | '__root__'
@@ -145,6 +156,7 @@ export interface FileRouteTypes {
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
     | '/dashboard/admin/gym-settings'
+    | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
   fileRoutesById: FileRoutesById
 }
@@ -221,6 +233,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminWaitlistRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
+    '/dashboard/admin/surveys': {
+      id: '/dashboard/admin/surveys'
+      path: '/surveys'
+      fullPath: '/dashboard/admin/surveys'
+      preLoaderRoute: typeof DashboardAdminSurveysRouteImport
+      parentRoute: typeof DashboardAdminRoute
+    }
     '/dashboard/admin/gym-settings': {
       id: '/dashboard/admin/gym-settings'
       path: '/gym-settings'
@@ -233,11 +252,13 @@ declare module '@tanstack/react-router' {
 
 interface DashboardAdminRouteChildren {
   DashboardAdminGymSettingsRoute: typeof DashboardAdminGymSettingsRoute
+  DashboardAdminSurveysRoute: typeof DashboardAdminSurveysRoute
   DashboardAdminWaitlistRoute: typeof DashboardAdminWaitlistRoute
 }
 
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
   DashboardAdminGymSettingsRoute: DashboardAdminGymSettingsRoute,
+  DashboardAdminSurveysRoute: DashboardAdminSurveysRoute,
   DashboardAdminWaitlistRoute: DashboardAdminWaitlistRoute,
 }
 
