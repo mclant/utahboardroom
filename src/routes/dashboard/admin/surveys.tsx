@@ -92,9 +92,10 @@ function RouteComponent() {
         <BarChart
           style={{
             width: "100%",
-            maxWidth: "500px",
+            maxWidth: "650px",
             maxHeight: "500px",
             height: "500px",
+            overflow: "visible",
           }}
           responsive
           data={boardVotesResultList}
