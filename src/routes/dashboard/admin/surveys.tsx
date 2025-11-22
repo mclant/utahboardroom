@@ -46,7 +46,6 @@ function RouteComponent() {
       votes,
     })
   )
-  console.log("boardVotesResultList:", boardVotesResultList)
 
   return (
     <BasicPageLayout title="Surveys">

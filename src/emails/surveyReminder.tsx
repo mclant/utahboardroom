@@ -21,7 +21,7 @@ export const WaitlistSurveyEmail = ({
   <Html>
     <Head />
     <Body style={main}>
-      <Preview>Utah Board Room survey - tell us which boards you want</Preview>
+      <Preview>Utah Board Room survey - don't forget to vote!</Preview>
       <Container style={container}>
         <Section style={box}>
           <Text style={paragraph}>Hey {name},</Text>
@@ -30,9 +30,8 @@ export const WaitlistSurveyEmail = ({
             you!
           </Text>
           <Text style={paragraph}>
-            As an early member, we value your input and we want you to be part
-            of the decision making process. We made this survey to get your
-            opinions on which boards you want to see in the Board Room.
+            In case you missed our previous email, we sent out a survey to get
+            your votes on which boards you want to see in the Board Room.
           </Text>
           <Button
             style={button}
@@ -40,27 +39,25 @@ export const WaitlistSurveyEmail = ({
           >
             Take the survey
           </Button>
-          <Hr style={hr} />
           <Text style={paragraph}>
-            We initially announced that we would have capacity for 8 boards, but
-            due to changes in the available warehouse space, we have to move
-            down to 7.
+            Although we have already received a lot of feedback, the types of
+            boards are still subject to change. Vote while there is still time!
           </Text>
           <Text style={{ ...paragraph, fontWeight: "bold", color: "#00D4FF" }}>
-            Not to worry! Crowds will still be minimal.
+            Opening day coming soon
           </Text>
           <Text style={paragraph}>
-            Your experience in the gym, (climbing without crowds), and making
-            the best training tools available to you to help you reach your
-            highest potential, are our top priorities. Please reach out to{" "}
+            Soon we will be announcing an opening date, we have our signts set
+            on early next year.
+          </Text>
+          <Text style={paragraph}>
+            Your experience in the gym, and making the best training tools
+            available to you to help you reach your highest potential, are our
+            top priorities. Please reach out to{" "}
             <Link style={anchor} href="mailto:matt@utahboardroom.com">
               matt@utahboardroom.com
             </Link>{" "}
             if you have any questions, concerns, or feedback.
-          </Text>
-          <Text style={paragraph}>
-            In the survey, let us know which boards you would be most excited to
-            see in the Board Room. We want to hear from you.
           </Text>
           <Text style={paragraph}>
             Thanks again for your psych in this project and we look forward to
