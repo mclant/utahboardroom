@@ -61,16 +61,16 @@ async function sendWaitlistEmails() {
     let successCount = 0
     let failCount = 0
 
-    const testUsers = [
-      {
-        email: "matthewclant@gmail.com",
-        full_name: "Matthew Clant",
-      },
-      // {
-      //   email: "tanner.m.wilks@gmail.com",
-      //   full_name: "Tanner",
-      // },
-    ]
+    // const testUsers = [
+    //   {
+    //     email: "matthewclant@gmail.com",
+    //     full_name: "Matthew Clant",
+    //   },
+    //   // {
+    //   //   email: "tanner.m.wilks@gmail.com",
+    //   //   full_name: "Tanner",
+    //   // },
+    // ]
 
     for (const user of finalUsers as WaitlistUser[]) {
       try {
