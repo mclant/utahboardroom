@@ -25,7 +25,14 @@ function RouteComponent() {
 
   return (
     <BasicPageLayout title={`${climber?.first_name} ${climber?.last_name}`}>
-      <Box sx={{ display: "flex", gap: 2, width: "100%" }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", lg: "row" },
+          gap: 2,
+          width: "100%",
+        }}
+      >
         <Box
           sx={{
             flex: 1,
