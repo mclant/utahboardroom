@@ -41,14 +41,14 @@ export const WaitlistSurveyEmail = ({
             Take the survey
           </Button>
           <Hr style={hr} />
-          <Text style={paragraph}>
+          {/* <Text style={paragraph}>
             We initially announced that we would have capacity for 8 boards, but
             due to changes in the available warehouse space, we have to move
             down to 7.
           </Text>
           <Text style={{ ...paragraph, fontWeight: "bold", color: "#00D4FF" }}>
             Not to worry! Crowds will still be minimal.
-          </Text>
+          </Text> */}
           <Text style={paragraph}>
             Your experience in the gym, (climbing without crowds), and making
             the best training tools available to you to help you reach your
