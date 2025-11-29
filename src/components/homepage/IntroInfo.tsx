@@ -146,8 +146,8 @@ export default function IntroInfo() {
           Boards only climbing gym
         </Typography>
         <Typography variant="body1">
-          Utah's first boards only climbing gym. We have 3 boards, with 3 more
-          on the way.
+          Utah's first boards-only climbing gym. Opening with a total of 7
+          boards.
         </Typography>
         <Box
           sx={{

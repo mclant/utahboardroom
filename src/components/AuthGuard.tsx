@@ -22,9 +22,11 @@ import { USER_ROLE_TYPE } from "@/types/climber"
 export default function AuthGuard({
   children,
   permissions,
+  gymOwnerPermission,
 }: {
   children: React.ReactNode
   permissions?: USER_ROLE_TYPE[]
+  gymOwnerPermission?: boolean
 }) {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
@@ -423,6 +425,24 @@ export default function AuthGuard({
     permissions?.length &&
     !permissions?.includes(climber?.user_type as USER_ROLE_TYPE)
   ) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 4,
+          height: "100vh",
+          width: "100%",
+        }}
+      >
+        <Card>
+          <Typography>You are not authorized to access this page</Typography>
+        </Card>
+      </Box>
+    )
+  }
+  if (gymOwnerPermission && !climber?.Gyms?.id) {
     return (
       <Box
         sx={{

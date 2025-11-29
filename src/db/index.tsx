@@ -102,7 +102,8 @@ export function useGetAuthUser() {
 
 export function useGetClimber({ userId }: { userId: string }) {
   const queryKey = ["getClimber", userId]
-  const queryFn = () => supabase.from("Climber").select("*").eq("id", userId)
+  const queryFn = () =>
+    supabase.from("Climber").select("*, Gyms(*)").eq("id", userId)
   return useQuery({ queryKey, queryFn, enabled: !!userId })
 }
 
@@ -174,6 +175,12 @@ export function useResetPassword() {
         password: newPassword,
       }),
   })
+}
+
+export function useGetGym({ gymId }: { gymId: string }) {
+  const queryKey = ["getGym", gymId]
+  const queryFn = () => supabase.from("Gyms").select("*").eq("id", gymId)
+  return useQuery({ queryKey, queryFn, enabled: !!gymId })
 }
 
 export { supabase }

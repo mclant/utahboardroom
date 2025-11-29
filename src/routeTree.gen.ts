@@ -15,11 +15,12 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SurveysBoardSelectionRouteImport } from './routes/surveys/board-selection'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
+import { Route as DashboardGymRouteImport } from './routes/dashboard/gym'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
 import { Route as DashboardAccountRouteImport } from './routes/dashboard/account'
+import { Route as DashboardGymGymSettingsRouteImport } from './routes/dashboard/gym/gym-settings'
 import { Route as DashboardAdminWaitlistRouteImport } from './routes/dashboard/admin/waitlist'
 import { Route as DashboardAdminSurveysRouteImport } from './routes/dashboard/admin/surveys'
-import { Route as DashboardAdminGymSettingsRouteImport } from './routes/dashboard/admin/gym-settings'
 
 const WaitlistRoute = WaitlistRouteImport.update({
   id: '/waitlist',
@@ -51,6 +52,11 @@ const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   path: '/demo/tanstack-query',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardGymRoute = DashboardGymRouteImport.update({
+  id: '/gym',
+  path: '/gym',
+  getParentRoute: () => DashboardRoute,
+} as any)
 const DashboardAdminRoute = DashboardAdminRouteImport.update({
   id: '/admin',
   path: '/admin',
@@ -60,6 +66,11 @@ const DashboardAccountRoute = DashboardAccountRouteImport.update({
   id: '/account',
   path: '/account',
   getParentRoute: () => DashboardRoute,
+} as any)
+const DashboardGymGymSettingsRoute = DashboardGymGymSettingsRouteImport.update({
+  id: '/gym-settings',
+  path: '/gym-settings',
+  getParentRoute: () => DashboardGymRoute,
 } as any)
 const DashboardAdminWaitlistRoute = DashboardAdminWaitlistRouteImport.update({
   id: '/waitlist',
@@ -71,12 +82,6 @@ const DashboardAdminSurveysRoute = DashboardAdminSurveysRouteImport.update({
   path: '/surveys',
   getParentRoute: () => DashboardAdminRoute,
 } as any)
-const DashboardAdminGymSettingsRoute =
-  DashboardAdminGymSettingsRouteImport.update({
-    id: '/gym-settings',
-    path: '/gym-settings',
-    getParentRoute: () => DashboardAdminRoute,
-  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -85,11 +90,12 @@ export interface FileRoutesByFullPath {
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
+  '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
-  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
+  '/dashboard/gym/gym-settings': typeof DashboardGymGymSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -98,11 +104,12 @@ export interface FileRoutesByTo {
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
+  '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
-  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
+  '/dashboard/gym/gym-settings': typeof DashboardGymGymSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -112,11 +119,12 @@ export interface FileRoutesById {
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
+  '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
-  '/dashboard/admin/gym-settings': typeof DashboardAdminGymSettingsRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
   '/dashboard/admin/waitlist': typeof DashboardAdminWaitlistRoute
+  '/dashboard/gym/gym-settings': typeof DashboardGymGymSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -127,11 +135,12 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
+    | '/dashboard/gym'
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
-    | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
+    | '/dashboard/gym/gym-settings'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -140,11 +149,12 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
+    | '/dashboard/gym'
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
-    | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
+    | '/dashboard/gym/gym-settings'
   id:
     | '__root__'
     | '/'
@@ -153,11 +163,12 @@ export interface FileRouteTypes {
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
+    | '/dashboard/gym'
     | '/demo/tanstack-query'
     | '/surveys/board-selection'
-    | '/dashboard/admin/gym-settings'
     | '/dashboard/admin/surveys'
     | '/dashboard/admin/waitlist'
+    | '/dashboard/gym/gym-settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -212,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoTanstackQueryRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard/gym': {
+      id: '/dashboard/gym'
+      path: '/gym'
+      fullPath: '/dashboard/gym'
+      preLoaderRoute: typeof DashboardGymRouteImport
+      parentRoute: typeof DashboardRoute
+    }
     '/dashboard/admin': {
       id: '/dashboard/admin'
       path: '/admin'
@@ -225,6 +243,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/account'
       preLoaderRoute: typeof DashboardAccountRouteImport
       parentRoute: typeof DashboardRoute
+    }
+    '/dashboard/gym/gym-settings': {
+      id: '/dashboard/gym/gym-settings'
+      path: '/gym-settings'
+      fullPath: '/dashboard/gym/gym-settings'
+      preLoaderRoute: typeof DashboardGymGymSettingsRouteImport
+      parentRoute: typeof DashboardGymRoute
     }
     '/dashboard/admin/waitlist': {
       id: '/dashboard/admin/waitlist'
@@ -240,24 +265,15 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardAdminSurveysRouteImport
       parentRoute: typeof DashboardAdminRoute
     }
-    '/dashboard/admin/gym-settings': {
-      id: '/dashboard/admin/gym-settings'
-      path: '/gym-settings'
-      fullPath: '/dashboard/admin/gym-settings'
-      preLoaderRoute: typeof DashboardAdminGymSettingsRouteImport
-      parentRoute: typeof DashboardAdminRoute
-    }
   }
 }
 
 interface DashboardAdminRouteChildren {
-  DashboardAdminGymSettingsRoute: typeof DashboardAdminGymSettingsRoute
   DashboardAdminSurveysRoute: typeof DashboardAdminSurveysRoute
   DashboardAdminWaitlistRoute: typeof DashboardAdminWaitlistRoute
 }
 
 const DashboardAdminRouteChildren: DashboardAdminRouteChildren = {
-  DashboardAdminGymSettingsRoute: DashboardAdminGymSettingsRoute,
   DashboardAdminSurveysRoute: DashboardAdminSurveysRoute,
   DashboardAdminWaitlistRoute: DashboardAdminWaitlistRoute,
 }
@@ -266,14 +282,28 @@ const DashboardAdminRouteWithChildren = DashboardAdminRoute._addFileChildren(
   DashboardAdminRouteChildren,
 )
 
+interface DashboardGymRouteChildren {
+  DashboardGymGymSettingsRoute: typeof DashboardGymGymSettingsRoute
+}
+
+const DashboardGymRouteChildren: DashboardGymRouteChildren = {
+  DashboardGymGymSettingsRoute: DashboardGymGymSettingsRoute,
+}
+
+const DashboardGymRouteWithChildren = DashboardGymRoute._addFileChildren(
+  DashboardGymRouteChildren,
+)
+
 interface DashboardRouteChildren {
   DashboardAccountRoute: typeof DashboardAccountRoute
   DashboardAdminRoute: typeof DashboardAdminRouteWithChildren
+  DashboardGymRoute: typeof DashboardGymRouteWithChildren
 }
 
 const DashboardRouteChildren: DashboardRouteChildren = {
   DashboardAccountRoute: DashboardAccountRoute,
   DashboardAdminRoute: DashboardAdminRouteWithChildren,
+  DashboardGymRoute: DashboardGymRouteWithChildren,
 }
 
 const DashboardRouteWithChildren = DashboardRoute._addFileChildren(

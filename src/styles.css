@@ -37,3 +37,25 @@ code {
 .recharts-surface {
   overflow: visible !important;
 }
+
+/* Calendar Heatmap */
+.react-calendar-heatmap rect {
+  rx: 2px;
+  ry: 2px;
+}
+.react-calendar-heatmap .color-scale-1 {
+  fill: #00d4ff;
+}
+.react-calendar-heatmap .color-scale-2 {
+  fill: #00d4ff;
+}
+.react-calendar-heatmap .color-scale-3 {
+  fill: #00d4ff;
+}
+.react-calendar-heatmap .color-scale-4 {
+  fill: #00d4ff;
+}
+.react-calendar-heatmap .color-empty {
+  fill: #a1a1aa;
+  opacity: 0.2;
+}

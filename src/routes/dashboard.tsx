@@ -44,11 +44,25 @@ function RouteComponent() {
               Utah Board Room
             </Typography>
             <SidebarItem title="Account" to="/dashboard/account" />
-            <SidebarItem title="Payment" to="/dashboard/payment" />
             <SidebarItem
               title="Gym live camera"
               to="/dashboard/gym-live-camera"
             />
+            {climber?.Gyms?.id && (
+              <>
+                <Typography
+                  variant="h6"
+                  color="accent1.main"
+                  sx={{ my: 1, px: 1, fontWeight: 700 }}
+                >
+                  Gym
+                </Typography>
+                <SidebarItem
+                  title="Gym Settings"
+                  to="/dashboard/gym/gym-settings"
+                />
+              </>
+            )}
             {climber?.user_type === USER_ROLE_TYPE.ADMIN && (
               <>
                 <Typography
@@ -60,10 +74,6 @@ function RouteComponent() {
                 </Typography>
                 <SidebarItem title="Waitlist" to="/dashboard/admin/waitlist" />
                 <SidebarItem title="Surveys" to="/dashboard/admin/surveys" />
-                <SidebarItem
-                  title="Gym Settings"
-                  to="/dashboard/admin/gym-settings"
-                />
               </>
             )}
           </Box>
@@ -103,7 +113,7 @@ function SidebarItem({ title, to }: { title: string; to: string }) {
   const theme = useTheme()
   const navigate = useNavigate()
   const location = useLocation()
-  const isActive = location.pathname.includes(title.toLowerCase())
+  const isActive = location.pathname === to
 
   return (
     <Typography
@@ -119,7 +129,6 @@ function SidebarItem({ title, to }: { title: string; to: string }) {
         transition: "background-color 0.3s ease",
         ...(isActive && {
           backgroundColor: theme.palette.primary.main,
-          filter: "brightness(0.9)",
         }),
         ":hover": {
           backgroundColor: theme.palette.primary.main,
