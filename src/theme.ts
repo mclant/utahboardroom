@@ -25,10 +25,12 @@ export const theme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#0A0A0B", // Deep space black
+      main: "#090909", // Deep space black
     },
     secondary: {
-      main: "#1A1A1D", // Charcoal gray
+      main: "#101012", // Charcoal gray
+      light: "#17181b",
+      border: "#2d3036"
     },
     accent1: {
       main: "#00D4FF", // Electric cyan
@@ -44,7 +46,7 @@ export const theme = createTheme({
     },
     background: {
       default: "#0A0A0B",
-      paper: "#1A1A1D",
+      paper: "#101012",
     },
     text: {
       primary: "#E4E4E7",
@@ -161,13 +163,14 @@ export const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: ({ theme }) => ({
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.secondary.light,
           transition: "all 0.3s ease",
           display: "flex",
           flexDirection: "column",
           gap: "8px",
           alignItems: "center",
           justifyContent: "center",
+          border: `1px solid ${theme.palette.secondary.border}`,
           borderRadius: "16px",
           padding: "24px 32px",
           textAlign: "center",

@@ -24,10 +24,11 @@ function RouteComponent() {
           sx={{
             height: "100%",
             width: "250px",
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: theme.palette.primary.main,
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            borderRight: `0.5px solid #26282d`,
           }}
         >
           <Box
@@ -99,7 +100,7 @@ function RouteComponent() {
           sx={{
             flex: 1,
             height: "100%",
-            backgroundColor: theme.palette.primary.main,
+            backgroundColor: theme.palette.secondary.main,
           }}
         >
           <Outlet />
@@ -128,10 +129,10 @@ function SidebarItem({ title, to }: { title: string; to: string }) {
         py: 0.4,
         transition: "background-color 0.3s ease",
         ...(isActive && {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.secondary.main,
         }),
         ":hover": {
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.secondary.main,
           filter: "brightness(0.9)",
         },
       }}

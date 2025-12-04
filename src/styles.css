@@ -59,3 +59,7 @@ code {
   fill: #a1a1aa;
   opacity: 0.2;
 }
+
+.MuiPaper-root {
+  --Paper-overlay: none !important;
+}
