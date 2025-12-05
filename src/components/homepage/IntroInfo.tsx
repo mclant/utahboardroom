@@ -16,6 +16,7 @@ import Tb2Layout from "/tb2layout.png"
 import { Link as RouterLink } from "@tanstack/react-router"
 import { IoCaretDown } from "react-icons/io5"
 import ReviewCard from "../atoms/ReviewCard"
+import PaymentInfoSection from "./PaymentInfoSection"
 
 const reviews = [
   {
@@ -209,12 +210,13 @@ export default function IntroInfo() {
           backgroundColor: theme.palette.primary.main,
           minHeight: "100vh",
           width: "100%",
+          maxWidth: "800px",
           paddingX: 4,
           gap: 4,
         }}
       >
         <Typography variant={isMobile ? "h4" : "h2"}>24/7 access</Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" color={theme.palette.accent2.main}>
           We are open 24/7. No staff. Just you and the boards.
         </Typography>
         <Typography variant="body1">
@@ -223,6 +225,7 @@ export default function IntroInfo() {
           We don't want the board room getting too crowded.
         </Typography>
       </Box>
+      <PaymentInfoSection />
       <Box
         id="faqsection"
         sx={{
@@ -230,7 +233,7 @@ export default function IntroInfo() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: theme.palette.primary.main,
           minHeight: "100vh",
           width: "100%",
           paddingX: 4,
@@ -330,7 +333,7 @@ export default function IntroInfo() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.secondary.main,
           minHeight: "100vh",
           width: "100%",
           paddingX: 4,

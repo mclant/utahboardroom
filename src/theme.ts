@@ -2,6 +2,14 @@ import { createTheme } from "@mui/material/styles"
 
 // Extend the Material-UI theme interface to include custom colors
 declare module "@mui/material/styles" {
+  interface PaletteColor {
+    border?: string
+  }
+
+  interface SimplePaletteColorOptions {
+    border?: string
+  }
+
   interface Palette {
     accent1: Palette["primary"]
     accent2: Palette["primary"]
@@ -128,7 +136,6 @@ export const theme = createTheme({
               color: theme.palette.primary.main,
               "&:hover": {
                 opacity: 0.7,
-                boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
               },
             }),
           }),
@@ -139,7 +146,6 @@ export const theme = createTheme({
               border: `1px solid ${theme.palette.accent1.main}`,
               "&:hover": {
                 opacity: 0.7,
-                boxShadow: `0 8px 25px ${theme.palette.accent3.main}33`,
               },
             }),
           }),

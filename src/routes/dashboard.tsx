@@ -84,6 +84,7 @@ function RouteComponent() {
               display: "flex",
               flexDirection: "column",
               alignItems: "flex-start",
+              p: 1,
             }}
           >
             <Button
@@ -130,9 +131,11 @@ function SidebarItem({ title, to }: { title: string; to: string }) {
         transition: "background-color 0.3s ease",
         ...(isActive && {
           backgroundColor: theme.palette.secondary.main,
+          border: `0.5px solid ${theme.palette.secondary.border}`,
         }),
         ":hover": {
           backgroundColor: theme.palette.secondary.main,
+          border: `0.5px solid ${theme.palette.secondary.border}`,
           filter: "brightness(0.9)",
         },
       }}

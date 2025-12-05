@@ -45,8 +45,8 @@ function App() {
           Coming to Orem, Utah
         </Typography>
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <Button variant="outlined" color="primary" href="/#faqsection">
-            Learn more
+          <Button variant="outlined" color="primary" href="/#pricing">
+            Pricing
           </Button>
           <Button
             variant="contained"
@@ -59,7 +59,7 @@ function App() {
         </Box>
       </BannerSection>
       <IntroInfo />
-      <BannerSection bgColor={theme.palette.secondary.main}>
+      <BannerSection bgColor={theme.palette.primary.main}>
         <Typography variant={isMobile ? "h5" : "h3"}>
           200 total spots
         </Typography>

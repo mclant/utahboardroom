@@ -1,10 +1,10 @@
 import BasicPageLayout from "@/components/BasicPageLayout"
-import { useGetAuthUser, useGetClimber } from "@/db"
-import { Box, Card, Chip, Typography, useTheme } from "@mui/material"
+import { Box, Button, Card, Typography, useTheme } from "@mui/material"
 import { createFileRoute } from "@tanstack/react-router"
 import CalendarHeatmap from "react-calendar-heatmap"
 import "react-calendar-heatmap/dist/styles.css"
 import { useState } from "react"
+import { useUser } from "@/hooks/useUser"
 
 export const Route = createFileRoute("/dashboard/account")({
   component: RouteComponent,
@@ -12,13 +12,7 @@ export const Route = createFileRoute("/dashboard/account")({
 
 function RouteComponent() {
   const theme = useTheme()
-  const { data: authUserData } = useGetAuthUser()
-  const authUser = authUserData?.data?.user
-  const { data: climberData } = useGetClimber({
-    userId: authUser?.id || "",
-  })
-  // @ts-ignore
-  const climber = climberData?.data?.[0]
+  const { climber } = useUser()
 
   const [selectedYear, setSelectedYear] = useState<number>(2025)
   const years = [2025, 2024, 2023]
@@ -28,20 +22,23 @@ function RouteComponent() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", lg: "row" },
-          gap: 2,
+          flexDirection: "column",
+          gap: 4,
           width: "100%",
+          maxWidth: "800px",
+          alignSelf: "center",
         }}
       >
         <Box
           sx={{
-            flex: 1,
+            width: "100%",
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
             gap: 2,
           }}
         >
+          <Typography variant="h5">Profile</Typography>
           <Card sx={{ alignItems: "flex-start", width: "100%" }}>
             <Typography variant="body1" fontWeight={700}>
               {climber?.first_name} {climber?.last_name}
@@ -51,14 +48,6 @@ function RouteComponent() {
             </Typography>
           </Card>
           <Card sx={{ alignItems: "flex-start", width: "100%" }}>
-            <Typography variant="body1" fontWeight={700}>
-              Membership Status
-            </Typography>
-            <MembershipStatusTag status={"Active"} />
-          </Card>
-        </Box>
-        <Box sx={{ flex: 3 }}>
-          <Card>
             <Typography>Gym Activity</Typography>
             <Box
               sx={{
@@ -113,13 +102,85 @@ function RouteComponent() {
             </Box>
           </Card>
         </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: 2,
+          }}
+        >
+          <Typography variant="h5">Membership</Typography>
+          <Card
+            sx={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "row",
+              gap: 2,
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                gap: 0,
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                }}
+              >
+                <Typography variant="body1" fontWeight={700}>
+                  Membership Status
+                </Typography>
+                <MembershipStatusTag
+                  status={climber?.stripe_customer_id ? "Active" : "Inactive"}
+                />
+              </Box>
+              <Typography variant="body1" sx={{ opacity: 0.7 }}>
+                See invoices, change billing, and cancel
+              </Typography>
+            </Box>
+            <Button variant="contained" color="primary">
+              Manage Membership
+            </Button>
+          </Card>
+        </Box>
       </Box>
     </BasicPageLayout>
   )
 }
 
-function MembershipStatusTag({ status }: { status: string }) {
+function MembershipStatusTag({ status }: { status: "Active" | "Inactive" }) {
+  const theme = useTheme()
   return (
-    <Chip label={status} color={status === "Active" ? "success" : "error"} />
+    <Box
+      sx={{
+        px: 1.5,
+        py: 0.5,
+        borderRadius: 2,
+        border: `1px solid ${status === "Active" ? theme.palette.accent1.main : theme.palette.text.primary}`,
+        opacity: status === "Active" ? 1 : 0.5,
+      }}
+    >
+      <Typography
+        variant="body1"
+        fontWeight={700}
+        color={
+          status === "Active"
+            ? theme.palette.accent1.main
+            : theme.palette.text.primary
+        }
+      >
+        {status}
+      </Typography>
+    </Box>
   )
 }
