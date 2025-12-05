@@ -110,8 +110,16 @@ export function useGetClimber({ userId }: { userId: string }) {
 export function useSignUp() {
   return useMutation({
     // @ts-ignore
-    mutationFn: ({ email, password }) =>
-      supabase.auth.signUp({ email, password }),
+    mutationFn: ({ email, password, emailRedirectTo }) =>
+      supabase.auth.signUp({ email, password, options: { emailRedirectTo } }),
+  })
+}
+
+export function useVerifyEmail() {
+  return useMutation({
+    // @ts-ignore
+    mutationFn: ({ email, token }) =>
+      supabase.auth.verifyOtp({ email, token, type: "email" }),
   })
 }
 

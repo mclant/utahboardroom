@@ -137,6 +137,12 @@ export const theme = createTheme({
               "&:hover": {
                 opacity: 0.7,
               },
+              ...(ownerState.disabled && {
+                backgroundColor: `${theme.palette.accent1.main} !important`,
+                color: `${theme.palette.primary.main} !important`,
+                opacity: 0.5,
+                cursor: "not-allowed",
+              }),
             }),
           }),
           ...(ownerState.variant === "outlined" && {
@@ -147,6 +153,10 @@ export const theme = createTheme({
               "&:hover": {
                 opacity: 0.7,
               },
+              ...(ownerState.disabled && {
+                opacity: 0.5,
+                cursor: "not-allowed",
+              }),
             }),
           }),
         }),

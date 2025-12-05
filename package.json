@@ -18,6 +18,8 @@
     "@gsap/react": "^2.1.2",
     "@mui/material": "^7.3.1",
     "@react-email/components": "^0.5.7",
+    "@stripe/react-stripe-js": "^5.4.1",
+    "@stripe/stripe-js": "^8.5.3",
     "@supabase/supabase-js": "^2.56.0",
     "@tailwindcss/vite": "^4.0.6",
     "@tanstack/react-devtools": "^0.2.2",

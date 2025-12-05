@@ -1,4 +1,5 @@
 import { Box, Button, Card, Typography, useTheme } from "@mui/material"
+import { useNavigate } from "@tanstack/react-router"
 
 export type PaymentOptionVariantType =
   | "FullYearly"
@@ -40,6 +41,7 @@ export default function PaymentOptionCard({
   isSelected: boolean
 }) {
   const theme = useTheme()
+  const navigate = useNavigate()
   const { headerDescription, monthlyPrice, billedText } =
     PaymentOptionDetailsMap[variant]
   return (
@@ -100,7 +102,12 @@ export default function PaymentOptionCard({
           {billedText}
         </Typography>
       </Box>
-      <Button variant="contained" color="primary" sx={{ width: "100%", mt: 4 }}>
+      <Button
+        variant="contained"
+        color="primary"
+        sx={{ width: "100%", mt: 4 }}
+        onClick={() => navigate({ to: "/onboarding/email" })}
+      >
         Get Started
       </Button>
     </Card>

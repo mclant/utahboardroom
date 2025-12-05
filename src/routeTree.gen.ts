@@ -11,10 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WaitlistRouteImport } from './routes/waitlist'
 import { Route as SurveysRouteImport } from './routes/surveys'
+import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DashboardIndexRouteImport } from './routes/dashboard/index'
 import { Route as SurveysBoardSelectionRouteImport } from './routes/surveys/board-selection'
+import { Route as OnboardingPaymentRouteImport } from './routes/onboarding/payment'
+import { Route as OnboardingEmailRouteImport } from './routes/onboarding/email'
+import { Route as OnboardingConfirmEmailRouteImport } from './routes/onboarding/confirm-email'
 import { Route as DemoTanstackQueryRouteImport } from './routes/demo.tanstack-query'
 import { Route as DashboardGymRouteImport } from './routes/dashboard/gym'
 import { Route as DashboardAdminRouteImport } from './routes/dashboard/admin'
@@ -31,6 +35,11 @@ const WaitlistRoute = WaitlistRouteImport.update({
 const SurveysRoute = SurveysRouteImport.update({
   id: '/surveys',
   path: '/surveys',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingRoute = OnboardingRouteImport.update({
+  id: '/onboarding',
+  path: '/onboarding',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -52,6 +61,21 @@ const SurveysBoardSelectionRoute = SurveysBoardSelectionRouteImport.update({
   id: '/board-selection',
   path: '/board-selection',
   getParentRoute: () => SurveysRoute,
+} as any)
+const OnboardingPaymentRoute = OnboardingPaymentRouteImport.update({
+  id: '/payment',
+  path: '/payment',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingEmailRoute = OnboardingEmailRouteImport.update({
+  id: '/email',
+  path: '/email',
+  getParentRoute: () => OnboardingRoute,
+} as any)
+const OnboardingConfirmEmailRoute = OnboardingConfirmEmailRouteImport.update({
+  id: '/confirm-email',
+  path: '/confirm-email',
+  getParentRoute: () => OnboardingRoute,
 } as any)
 const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
   id: '/demo/tanstack-query',
@@ -92,12 +116,16 @@ const DashboardAdminSurveysRoute = DashboardAdminSurveysRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/onboarding/confirm-email': typeof OnboardingConfirmEmailRoute
+  '/onboarding/email': typeof OnboardingEmailRoute
+  '/onboarding/payment': typeof OnboardingPaymentRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
@@ -106,12 +134,16 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/onboarding/confirm-email': typeof OnboardingConfirmEmailRoute
+  '/onboarding/email': typeof OnboardingEmailRoute
+  '/onboarding/payment': typeof OnboardingPaymentRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard': typeof DashboardIndexRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
@@ -122,12 +154,16 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRouteWithChildren
+  '/onboarding': typeof OnboardingRouteWithChildren
   '/surveys': typeof SurveysRouteWithChildren
   '/waitlist': typeof WaitlistRoute
   '/dashboard/account': typeof DashboardAccountRoute
   '/dashboard/admin': typeof DashboardAdminRouteWithChildren
   '/dashboard/gym': typeof DashboardGymRouteWithChildren
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
+  '/onboarding/confirm-email': typeof OnboardingConfirmEmailRoute
+  '/onboarding/email': typeof OnboardingEmailRoute
+  '/onboarding/payment': typeof OnboardingPaymentRoute
   '/surveys/board-selection': typeof SurveysBoardSelectionRoute
   '/dashboard/': typeof DashboardIndexRoute
   '/dashboard/admin/surveys': typeof DashboardAdminSurveysRoute
@@ -139,12 +175,16 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/onboarding'
     | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/dashboard/gym'
     | '/demo/tanstack-query'
+    | '/onboarding/confirm-email'
+    | '/onboarding/email'
+    | '/onboarding/payment'
     | '/surveys/board-selection'
     | '/dashboard/'
     | '/dashboard/admin/surveys'
@@ -153,12 +193,16 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/onboarding'
     | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/dashboard/gym'
     | '/demo/tanstack-query'
+    | '/onboarding/confirm-email'
+    | '/onboarding/email'
+    | '/onboarding/payment'
     | '/surveys/board-selection'
     | '/dashboard'
     | '/dashboard/admin/surveys'
@@ -168,12 +212,16 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/onboarding'
     | '/surveys'
     | '/waitlist'
     | '/dashboard/account'
     | '/dashboard/admin'
     | '/dashboard/gym'
     | '/demo/tanstack-query'
+    | '/onboarding/confirm-email'
+    | '/onboarding/email'
+    | '/onboarding/payment'
     | '/surveys/board-selection'
     | '/dashboard/'
     | '/dashboard/admin/surveys'
@@ -184,6 +232,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRouteWithChildren
+  OnboardingRoute: typeof OnboardingRouteWithChildren
   SurveysRoute: typeof SurveysRouteWithChildren
   WaitlistRoute: typeof WaitlistRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
@@ -203,6 +252,13 @@ declare module '@tanstack/react-router' {
       path: '/surveys'
       fullPath: '/surveys'
       preLoaderRoute: typeof SurveysRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding': {
+      id: '/onboarding'
+      path: '/onboarding'
+      fullPath: '/onboarding'
+      preLoaderRoute: typeof OnboardingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -232,6 +288,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/surveys/board-selection'
       preLoaderRoute: typeof SurveysBoardSelectionRouteImport
       parentRoute: typeof SurveysRoute
+    }
+    '/onboarding/payment': {
+      id: '/onboarding/payment'
+      path: '/payment'
+      fullPath: '/onboarding/payment'
+      preLoaderRoute: typeof OnboardingPaymentRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
+    '/onboarding/email': {
+      id: '/onboarding/email'
+      path: '/email'
+      fullPath: '/onboarding/email'
+      preLoaderRoute: typeof OnboardingEmailRouteImport
+      parentRoute: typeof OnboardingRoute
+    }
+    '/onboarding/confirm-email': {
+      id: '/onboarding/confirm-email'
+      path: '/confirm-email'
+      fullPath: '/onboarding/confirm-email'
+      preLoaderRoute: typeof OnboardingConfirmEmailRouteImport
+      parentRoute: typeof OnboardingRoute
     }
     '/demo/tanstack-query': {
       id: '/demo/tanstack-query'
@@ -329,6 +406,22 @@ const DashboardRouteWithChildren = DashboardRoute._addFileChildren(
   DashboardRouteChildren,
 )
 
+interface OnboardingRouteChildren {
+  OnboardingConfirmEmailRoute: typeof OnboardingConfirmEmailRoute
+  OnboardingEmailRoute: typeof OnboardingEmailRoute
+  OnboardingPaymentRoute: typeof OnboardingPaymentRoute
+}
+
+const OnboardingRouteChildren: OnboardingRouteChildren = {
+  OnboardingConfirmEmailRoute: OnboardingConfirmEmailRoute,
+  OnboardingEmailRoute: OnboardingEmailRoute,
+  OnboardingPaymentRoute: OnboardingPaymentRoute,
+}
+
+const OnboardingRouteWithChildren = OnboardingRoute._addFileChildren(
+  OnboardingRouteChildren,
+)
+
 interface SurveysRouteChildren {
   SurveysBoardSelectionRoute: typeof SurveysBoardSelectionRoute
 }
@@ -343,6 +436,7 @@ const SurveysRouteWithChildren =
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRouteWithChildren,
+  OnboardingRoute: OnboardingRouteWithChildren,
   SurveysRoute: SurveysRouteWithChildren,
   WaitlistRoute: WaitlistRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
